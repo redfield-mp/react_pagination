@@ -31,7 +31,12 @@ export const Pagination = ({
     }
   };
 
-  const handlePageClick = (pageNumber: number) => {
+  const handlePageClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    pageNumber: number,
+  ) => {
+    event.preventDefault();
+
     if (pageNumber !== currentPage) {
       onPageChange(pageNumber);
     }
@@ -62,10 +67,7 @@ export const Pagination = ({
             data-cy="pageLink"
             className="page-link"
             href={`#${n}`}
-            onClick={event => {
-              event.preventDefault();
-              handlePageClick(n);
-            }}
+            onClick={event => handlePageClick(event, n)}
           >
             {n}
           </a>
