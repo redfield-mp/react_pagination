@@ -31,6 +31,12 @@ export const Pagination = ({
     }
   };
 
+  const handlePageClick = (pageNumber: number) => {
+    if (pageNumber !== currentPage) {
+      onPageChange(pageNumber);
+    }
+  };
+
   return (
     <ul className="pagination">
       <li className={cn('page-item', { disabled: currentPage === 1 })}>
@@ -56,7 +62,10 @@ export const Pagination = ({
             data-cy="pageLink"
             className="page-link"
             href={`#${n}`}
-            onClick={() => onPageChange(n)}
+            onClick={event => {
+              event.preventDefault();
+              handlePageClick(n);
+            }}
           >
             {n}
           </a>
