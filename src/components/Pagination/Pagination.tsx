@@ -4,14 +4,14 @@ import { getNumbers } from '../../utils';
 type Props = {
   total: number;
   perPage: number;
-  currentPage: number;
+  currentPage?: number;
   onPageChange: (page: number) => void;
 };
 
 export const Pagination = ({
   total,
   perPage,
-  currentPage,
+  currentPage = 1,
   onPageChange,
 }: Props) => {
   const pagesCount = Math.ceil(total / perPage);
@@ -19,14 +19,14 @@ export const Pagination = ({
 
   const handlePrevClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    if (currentPage > 1) {
+    if (currentPage && currentPage > 1) {
       onPageChange(currentPage - 1);
     }
   };
 
   const handleNextClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    if (currentPage < pagesCount) {
+    if (currentPage && currentPage < pagesCount) {
       onPageChange(currentPage + 1);
     }
   };
